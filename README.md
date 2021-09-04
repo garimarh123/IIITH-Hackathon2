@@ -528,6 +528,10 @@ SaleCondition: Condition of sale
 
 # Explainability of Data
 
+<!-- TODO: Remove before submission -->
+
+Link: https://colab.research.google.com/drive/1nPJ7uy2hHJpA5efjSGt_7ORVPWWVMV7A#scrollTo=x_Fn6k3_hBti
+
 ## Variable Importance
 
 The variable importance plot shows the relative importance of the most important variables in the model.
