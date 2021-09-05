@@ -53,14 +53,14 @@ These are some of the attributes that we have identified, based on some research
 - Exterior1st and Exterior2nd
 - YearBuilt
 - HouseStyle
-- Heating and HeatingQC and CentralAir
+- HeatingQC
 - FullBath
 - HalfBath
 - Bedroom
 - Functional
-- SaleType
 - YrSold
 - Fence
+- SaleCondition
 
   **Therefore we will be using only the top 10 attributes and 16 others listed to train our model and not all 79 attributes**
 
