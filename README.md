@@ -45,24 +45,24 @@ These are some of the attributes that we have identified, based on some research
 
 - MSSubClass
 - MSZoning
-- LotArea
-- LotShape
-- Utilities
-- BldgType
+    <!-- - LotArea - mostly 1300.00 - 22694.50 -->
+    <!-- - LotShape  - mostly Reg -->
+  <!-- - Utilities - 100% data is AllPub -->
+  <!-- - BldgType  - mostly 1Fam -->
 - OverallCond
-- Exterior1st and Exterior2nd
+- Exterior1st
+- Exterior2nd
 - YearBuilt
 - HouseStyle
 - HeatingQC
 - FullBath
 - HalfBath
 - Bedroom
-- Functional
+<!-- - Functional - mostly Typ -->
 - YrSold
-- Fence
-- SaleCondition
+- TotRmsAbvGrd - good spread
 
-  **Therefore we will be using only the top 10 attributes and 16 others listed to train our model and not all 79 attributes**
+  **Therefore we will be using only the top 10 attributes and 18 others listed to train our model and not all 79 attributes**
 
 # Approach to problem
 
