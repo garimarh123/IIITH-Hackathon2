@@ -45,10 +45,9 @@ These are some of the attributes that we have identified, based on some research
 
 - MSSubClass
 - MSZoning
-    <!-- - LotArea - mostly 1300.00 - 22694.50 -->
-    <!-- - LotShape  - mostly Reg -->
-  <!-- - Utilities - 100% data is AllPub -->
-  <!-- - BldgType  - mostly 1Fam -->
+- LotArea
+- LotShape
+- BldgType
 - OverallCond
 - Exterior1st
 - Exterior2nd
@@ -58,9 +57,8 @@ These are some of the attributes that we have identified, based on some research
 - FullBath
 - HalfBath
 - Bedroom
-<!-- - Functional - mostly Typ -->
 - YrSold
-- TotRmsAbvGrd - good spread
+- TotRmsAbvGrd
 
   **Therefore we will be using only the top 10 attributes and 18 others listed to train our model and not all 79 attributes**
 
@@ -98,5 +96,3 @@ The most common features of PCR are:
 
 1. Dimensionality Reduction
 2. Removal of multicollinearity
-
-
