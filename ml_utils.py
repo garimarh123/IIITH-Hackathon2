@@ -25,7 +25,6 @@ attributes_for_training_model = [
     "MSZoning",
     # "LotArea",
     # "LotShape",
-    # "Utilities",
     # "BldgType",
     "OverallCond",
     "Exterior1st",
@@ -36,7 +35,6 @@ attributes_for_training_model = [
     "FullBath",
     "HalfBath",
     "Bedroom",
-    # "Functional",
     "YrSold",
     "TotRmsAbvGrd",
 ]
@@ -63,7 +61,7 @@ def prepare_data():
     # df["MasVnrType"] = df["MasVnrType"].replace(np.nan, "")
     # df["MasVnrArea"] = df["MasVnrArea"].replace(np.nan, "")
 
-     df["BsmtQual"] = df["Alley"].replace(np.nan, "")
+    # df["BsmtQual"] = df["Alley"].replace(np.nan, "")
     # df["BsmtCond"] = df["Alley"].replace(np.nan, "")
     # df["BsmtExposure"] = df["BsmtExposure"].replace(np.nan, "")
     # df["BsmtFinType1"] = df["BsmtFinType1"].replace(np.nan, "")
