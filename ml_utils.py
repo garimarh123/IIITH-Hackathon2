@@ -1,7 +1,7 @@
 import numpy as np
-from sklearn.naive_bayes import GaussianNB
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.linear_model import LinearRegression
+
 from sklearn.metrics import accuracy_score
 
 from pandas import read_csv
@@ -111,51 +111,38 @@ def load_model():
     X_test, y_test = prepare_data(testData)
     print("Data prepared")
 
-    GaussianNBClf = GaussianNB()
-    DecisionTreeClf = DecisionTreeClassifier(max_depth=2, random_state=1)
-    RandomForestClf = RandomForestClassifier(
-        criterion="entropy", random_state=0, min_samples_split=2
-    )
+    LinearRegressionModel = LinearRegression()
 
-    GaussianNBClf.fit(X_train, y_train)
-    # calculate the print the accuracy score
-    GaussianNBClf_acc = accuracy_score(y_test, GaussianNBClf.predict(X_test))
+    RandomForestModel = RandomForestRegressor(n_estimators=1000, random_state=42)
 
-    DecisionTreeClf.fit(X_train, y_train)
-    DecisionTreeClf_acc = accuracy_score(y_test, DecisionTreeClf.predict(X_test))
+    LinearRegressionModel.fit(X_train, y_train)
+    LinearRegressionModelPredictions = LinearRegressionModel.predict(X_test)
+    LinearRegressionModelErrors = abs(LinearRegressionModelPredictions - y_test)
+    mape = 100 * (LinearRegressionModelErrors / y_test)
+    LinearRegressionModel_acc = 100 - np.mean(mape)
 
-    RandomForestClf.fit(X_train, y_train)
-    RandomForestClf_acc = accuracy_score(y_test, RandomForestClf.predict(X_test))
-    print(f"GaussianNB Classifier trained with accuracy: " + str(GaussianNBClf_acc))
+    RandomForestModel.fit(X_train, y_train)
+    RandomForestModelPredictions = RandomForestModel.predict(X_test)
+    RandomForestModelErrors = abs(RandomForestModelPredictions - y_test)
+    mape = 100 * (RandomForestModelErrors / y_test)
+    RandomForestModel_acc = 100 - np.mean(mape)
+
     print(
-        f"Decision Tree Classifier trained with accuracy: " + str(DecisionTreeClf_acc)
+        f"Linear Regression Model trained with accuracy: "
+        + str(LinearRegressionModel_acc)
     )
-    print(
-        f"Random Forest Classifier trained with accuracy: " + str(RandomForestClf_acc)
-    )
-    if (
-        DecisionTreeClf_acc > GaussianNBClf_acc
-        and DecisionTreeClf_acc > RandomForestClf_acc
-    ):
-        print("Using Decision Tree Classifier")
-        print()
-        CLF = DecisionTreeClf
+    print(f"Random Forest Model trained with accuracy: " + str(RandomForestModel_acc))
+
+    if LinearRegressionModel_acc > RandomForestModel_acc:
+        print("Using Linear Regression Model ")
+        CLF = LinearRegressionModel
         print(page_break)
-        return DecisionTreeClf_acc, "Decision Tree Classifier"
+        return LinearRegressionModel_acc, "Linear Regression Model "
     else:
-        if (
-            GaussianNBClf_acc > DecisionTreeClf_acc
-            and GaussianNBClf_acc > RandomForestClf_acc
-        ):
-            print("Using GaussianNB Classifier")
-            CLF = GaussianNBClf
-            print(page_break)
-            return GaussianNBClf_acc, "GaussianNB Classifier"
-        else:
-            print("Using RandomForest Classifier")
-            CLF = RandomForestClf
-            print(page_break)
-            return RandomForestClf_acc, "RandomForest Classifier"
+        print("Using Random Forest Model")
+        CLF = RandomForestModel
+        print(page_break)
+        return RandomForestModel_acc, "Random Forest Model"
 
 
 # function to predict the selling price using the model
