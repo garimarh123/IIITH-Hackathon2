@@ -98,3 +98,5 @@ The most common features of PCR are:
 
 1. Dimensionality Reduction
 2. Removal of multicollinearity
+
+
