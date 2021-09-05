@@ -1,4 +1,5 @@
 import numpy as np
+from numpy.lib import math
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import LinearRegression
 
@@ -42,7 +43,34 @@ attributes_for_training_model = [
     "YrSold",
     "TotRmsAbvGrd",
 ]
-
+all_attributes_for_training_model = [
+    "ExterQual",
+    "GrLivArea",
+    "KitchenQual",
+    "Neighborhood",
+    "1stFlrSF",
+    "TotalBsmtSF",
+    "BsmtFinSF1",
+    "GarageCars",
+    "GarageArea",
+    "MSSubClass",
+    "MSZoning",
+    "LotArea",
+    "LotShape",
+    "BldgType",
+    "OverallCond",
+    "Exterior1st",
+    "Exterior2nd",
+    "YearBuilt",
+    "HouseStyle",
+    "HeatingQC",
+    "FullBath",
+    "HalfBath",
+    "Bedroom",
+    "YrSold",
+    "TotRmsAbvGrd",
+    "SalePrice",
+]
 trainData = pd.DataFrame([])
 cat_ix = pd.DataFrame([])
 
@@ -84,15 +112,13 @@ def load_model():
 
     missing_values = ["NA"]
     trainData = read_csv("data/train.csv", sep=",", na_values=missing_values)
-    trainData.columns = "Id,MSSubClass,MSZoning,LotFrontage,LotArea,Street,Alley,LotShape,LandContour,Utilities,LotConfig,LandSlope,Neighborhood,Condition1,Condition2,BldgType,HouseStyle,OverallQual,OverallCond,YearBuilt,YearRemodAdd,RoofStyle,RoofMatl,Exterior1st,Exterior2nd,MasVnrType,MasVnrArea,ExterQual,ExterCond,Foundation,BsmtQual,BsmtCond,BsmtExposure,BsmtFinType1,BsmtFinSF1,BsmtFinType2,BsmtFinSF2,BsmtUnfSF,TotalBsmtSF,Heating,HeatingQC,CentralAir,Electrical,1stFlrSF,2ndFlrSF,LowQualFinSF,GrLivArea,BsmtFullBath,BsmtHalfBath,FullBath,HalfBath,Bedroom,KitchenAbvGr,KitchenQual,TotRmsAbvGrd,Functional,Fireplaces,FireplaceQu,GarageType,GarageYrBlt,GarageFinish,GarageCars,GarageArea,GarageQual,GarageCond,PavedDrive,WoodDeckSF,OpenPorchSF,EnclosedPorch,3SsnPorch,ScreenPorch,PoolArea,PoolQC,Fence,MiscFeature,MiscVal,MoSold,YrSold,SaleType,SaleCondition,SalePrice".split(
-        ","
-    )
+    trainData = substitute(copy.deepcopy(trainData))
+
     testData = read_csv("data/train.csv", sep=",", na_values=missing_values)
-    testData.columns = "Id,MSSubClass,MSZoning,LotFrontage,LotArea,Street,Alley,LotShape,LandContour,Utilities,LotConfig,LandSlope,Neighborhood,Condition1,Condition2,BldgType,HouseStyle,OverallQual,OverallCond,YearBuilt,YearRemodAdd,RoofStyle,RoofMatl,Exterior1st,Exterior2nd,MasVnrType,MasVnrArea,ExterQual,ExterCond,Foundation,BsmtQual,BsmtCond,BsmtExposure,BsmtFinType1,BsmtFinSF1,BsmtFinType2,BsmtFinSF2,BsmtUnfSF,TotalBsmtSF,Heating,HeatingQC,CentralAir,Electrical,1stFlrSF,2ndFlrSF,LowQualFinSF,GrLivArea,BsmtFullBath,BsmtHalfBath,FullBath,HalfBath,Bedroom,KitchenAbvGr,KitchenQual,TotRmsAbvGrd,Functional,Fireplaces,FireplaceQu,GarageType,GarageYrBlt,GarageFinish,GarageCars,GarageArea,GarageQual,GarageCond,PavedDrive,WoodDeckSF,OpenPorchSF,EnclosedPorch,3SsnPorch,ScreenPorch,PoolArea,PoolQC,Fence,MiscFeature,MiscVal,MoSold,YrSold,SaleType,SaleCondition,SalePrice".split(
-        ","
-    )
+    testData = substitute(copy.deepcopy(trainData))
     print("Loaded data")
-    workingTrainingSet = copy.deepcopy(trainData)
+
+    workingTrainingSet = trainData
     workingTrainingSet.append(testData)
 
     # Categorical features has to be converted into integer values for the model to process.
@@ -146,26 +172,48 @@ def load_model():
 
 
 # function to predict the selling price using the model
-def predict(query_data):
-    global DATA, cat_ix
+def predict(query_data: list):
+    global trainData, cat_ix
+    query_data.append(1)
+    query_data = pd.DataFrame(query_data)
+    query_data = query_data.transpose()
 
-    new_data = query_data
-    new_data.append(1)
-    new_data = pd.DataFrame([new_data])[attributes_for_training_model]
+    query_data.columns = all_attributes_for_training_model
 
     # This was nessassry to encode the data properly in the previous hackathon,
     # I will remove it if it's needed, when we get here
     x = copy.deepcopy(trainData)
-    x = x.append(new_data, ignore_index=True)
-    last_ix = len(x.columns) - 1
-    x = x.drop(last_ix, axis=1)
+    x = x.append(query_data, ignore_index=True)
+    x = x[attributes_for_training_model]
 
     ct = ColumnTransformer([("o", OneHotEncoder(), cat_ix)], remainder="passthrough")
     x = ct.fit_transform(x.astype(object))
-
-    prediction = CLF.predict([x[x.shape[0] - 1]])[0]
+    index = x.shape[0] - 1
+    prediction = CLF.predict(x[index])[0]
     print(f"Model prediction: {prediction}")
     return prediction
 
 
-load_model()
+def substitute(df):
+    headers = "Id,MSSubClass,MSZoning,LotFrontage,LotArea,Street,Alley,LotShape,LandContour,Utilities,LotConfig,LandSlope,Neighborhood,Condition1,Condition2,BldgType,HouseStyle,OverallQual,OverallCond,YearBuilt,YearRemodAdd,RoofStyle,RoofMatl,Exterior1st,Exterior2nd,MasVnrType,MasVnrArea,ExterQual,ExterCond,Foundation,BsmtQual,BsmtCond,BsmtExposure,BsmtFinType1,BsmtFinSF1,BsmtFinType2,BsmtFinSF2,BsmtUnfSF,TotalBsmtSF,Heating,HeatingQC,CentralAir,Electrical,1stFlrSF,2ndFlrSF,LowQualFinSF,GrLivArea,BsmtFullBath,BsmtHalfBath,FullBath,HalfBath,Bedroom,KitchenAbvGr,KitchenQual,TotRmsAbvGrd,Functional,Fireplaces,FireplaceQu,GarageType,GarageYrBlt,GarageFinish,GarageCars,GarageArea,GarageQual,GarageCond,PavedDrive,WoodDeckSF,OpenPorchSF,EnclosedPorch,3SsnPorch,ScreenPorch,PoolArea,PoolQC,Fence,MiscFeature,MiscVal,MoSold,YrSold,SaleType,SaleCondition,SalePrice".split(
+        ","
+    )
+    df.columns = headers
+    return df
+
+
+def getData():
+    global trainData
+    print("test")
+    data = copy.deepcopy(trainData[attributes_for_training_model])
+    data_arr = data.to_numpy()
+    print(data_arr)
+    js = data.to_json(orient="records")
+    print(data.columns)
+    text = "\s"
+    js.replace(text[0], "")
+
+    print("Sending data")
+    print(page_break)
+
+    return js
