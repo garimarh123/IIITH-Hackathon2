@@ -2,11 +2,11 @@
 
 # Problem
 
-Due to our pc contraints we could not implement the kafka and spark correctly. Everytime we tried to test the work on docker our pcs are crashing, we tried our best to complete the hackthon to the best of our ability.
+Due to our pc constraints we could not implement the kafka and spark correctly. Everytime we tried to test the work on docker our pcs are crashing, we tried to complete the hackthon to the best of our ability.
 
-We have a working project in the **'Docker'** folder. In this project we implemented a simple API with docker that trains on the train dataset and then can predict the house selling for the test data set and the accuracy is returned to the user.
+We have a working project in the **'Docker'** folder. In this project we implemented a simple API with docker that trains on the train dataset and then can predict the house selling for the test data set and the accuracy is returned to the user, and this is also include docker
 
-In the **'SparkDocker'** folder we have a project that implements kafka and pysprak in docker. However it is not working and we could not test all the code throughly due to our pc constrants. We are hoping the markers would look through our code and give us marks, where we deserve them and give us some advice on how we could have mitigated this problem. We looked into Google Kubernetes Engine (GKE), Google Cloud Platform for a virtual machine, and even google collab but all failed and we just implemented what we thought could work on our local machines.
+In the **'SparkDocker'** folder we have a project that implements kafka and pysprak in docker. However it is not working and we could not test all the code throughly due to our pc constraints. We are hoping the markers would look through our code and give us marks, where we deserve them and give us some advice on how we could have mitigated this problem. We looked into Google Kubernetes Engine (GKE), Google Cloud Platform for a virtual machine, and even google collab but all failed and we just implemented what we thought could work on our local machines.
 
 # Overview of data
 
