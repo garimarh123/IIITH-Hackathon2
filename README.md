@@ -4,7 +4,7 @@
 
 Due to our pc contraints we could not implement the kafka and spark correctly. Everytime we tried to test the work on docker our pcs are crashing, we tried our best to complete the hackthon to the best of our ability.
 
-We have a working project in the **'SimpleDockerWorking'** folder. In this project we implemented a simple API with docker that trains on the train dataset and then can predict the house selling for the test data set and the accuracy is returned to the user.
+We have a working project in the **'SimpleWorkingDocker'** folder. In this project we implemented a simple API with docker that trains on the train dataset and then can predict the house selling for the test data set and the accuracy is returned to the user.
 
 In the **'SparkDocker'** folder we have a project that implements kafka and pysprak in docker. However it is not working and we could not test all the code throughly due to our pc constrants. We are hoping the markers would look through our code and give us marks, where we deserve them and give us some advice on how we could have mitigated this problem. We looked into Google Kubernetes Engine (GKE), Google Cloud Platform for a virtual machine, and even google collab but all failed and we just implemented what we thought could work on our local machines.
 
@@ -89,7 +89,7 @@ The overall idea of regression is to examine two things:
 
 Run the following commands (all the required packages are in the different folder)
 
-1.  cd SimpleDockerWorking
+1.  cd SimpleWorkingDocker
 2.  docker-compose build
 3.  docker-compose up
 
@@ -100,8 +100,8 @@ Run the following commands (all the required packages are in the different folde
 1.  cd SparkDocker
 2.  docker-compose build
 3.  docker-compose up
-4.  Terminal 1: 
+4.  Terminal 1:
     python3 pyspark_consumer_api.py
 
-5.  Terminal 2: 
+5.  Terminal 2:
     python3 kafka_producer_client.py
