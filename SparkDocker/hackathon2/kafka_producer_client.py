@@ -42,5 +42,5 @@ def write_to_kafka(topic_name, items):
   print("Wrote {0} messages into topic: {1}".format(count, topic_name))
 
 df = pd.read_csv('data/test.csv')
-
-
+for x in df:
+    write_to_kafka('housing-price-test', x)
