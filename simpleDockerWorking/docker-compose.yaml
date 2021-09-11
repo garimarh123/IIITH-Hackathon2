@@ -1,0 +1,15 @@
+version: "2"
+
+services:
+  hackathon2:
+    deploy:
+      replicas: 1
+    build: hackathon2
+    environment:
+      - HACKATHON_ENDPOINT=http://hackathon2:7777
+    ports:
+      - "7777:7777"
+    volumes:
+      - ./models:/app/models
+      - ./data:/app/data
+      - ./html:/app/html
