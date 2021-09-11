@@ -1,12 +1,18 @@
 # IIITH Hackathon 2
 
+# Problem
+
+Due to our pc contraints we could not implement the kafka and spark correctly. Everytime we tried to test the work on docker our pcs are crashing, we tried our best to complete the hackthon to the best of our ability.
+
+We have a working project in the **'simpleDockerWorking'** folder. In this project we implemented a simple API with docker that trains on the train dataset and then can predict the house selling for the test data set and the accuracy is returned to the user.
+
+In the **'SparkDocker'** folder we have a project that implements kafka and pysprak in docker. However it is not working and we could not test all the code throughly due to our pc constrants. We are hoping the markers would look through our code and give us marks, where we deserve them and give us some advice on how we could have mitigated this problem. We looked into Google Kubernetes Engine (GKE), Google Cloud Platform for a virtual machine, and even google collab but all failed and we just implemented what we thought could work on our local machines.
+
 # Overview of data
 
 **The information about the dataset is in the readme file, in the 'data' folder**
 
 # Explainability of Data
-
-<!-- TODO: Remove before submission -->
 
 Link: https://colab.research.google.com/drive/1nPJ7uy2hHJpA5efjSGt_7ORVPWWVMV7A#scrollTo=x_Fn6k3_hBti
 
@@ -61,41 +67,23 @@ These are some of the attributes that we have identified, based on some research
 - TotRmsAbvGrd
 
   **Therefore we will be using only the top 10 attributes and 18 others listed to train our model and not all 79 attributes**
+  NOTE: We expect none of these values to be null or empty so we are not accounting for it. We did double check with all the data to make sure there is no null values in these columns.
+
+We have drawn out a few graphs on our jupiter notebook (Link: https://colab.research.google.com/drive/1nPJ7uy2hHJpA5efjSGt_7ORVPWWVMV7A#scrollTo=x_Fn6k3_hBti) to futher analyse the different attributes.
 
 # Approach to problem
 
 A regression analysis is used to model the relationship between a dependent variable and one or more independent variables.
-It is quite evident that this is a regression problem as the selling price is dependent on the other 79 attributes (x attributes)
+It is quite evident that this is a regression problem as the selling price is dependent on the other 79 attributes, but mostly the 28 variable we pointed out.
 
 The overall idea of regression is to examine two things:
 
 - Does a set of predictor attributes do a good job in predicting an outcome (selling price)?
+
+  - Yes it does the accuracy of our model is always more than 70% with our train and test datasets.
+
 - Which attributes in particular are significant predictors of the outcome, and in what way do they indicated by the magnitude and sign of the beta estimates–impact the outcome?
-
-# NOTES FOR US => will be removed before submission
-
-## How to choose the correct regression model?
-
-**Link:** https://www.listendata.com/2018/03/regression-analysis.html
-
-1. If dependent variable is continuous and model is suffering from collinearity or there are a lot of independent variables, you can try PCR, PLS, ridge, lasso and elastic net regressions. You can select the final model based on Adjusted r-square, RMSE, AIC and BIC.
-2. If you are working on count data, you should try poisson, quasi-poisson and negative binomial regression.
-3. To avoid overfitting, we can use cross-validation method to evaluate models used for prediction. We can also use ridge, lasso and elastic net regressions techniques to correct overfitting issue.
-4. Try support vector regression when you have non-linear model.
-
-**Linear Regression:** It is the simplest form of regression. It is a technique in which the dependent variable is continuous in nature. The relationship between the dependent variable and independent variables is assumed to be linear in nature.
-
-**Quantile regression:** Quantile regression is the extension of linear regression and we generally use it when outliers, high skeweness and heteroscedasticity exist in the data.
-
-**Principal Components Regression (PCR):** PCR is a regression technique which is widely used when you have many independent variables OR multicollinearity exist in your data. It is divided into 2 steps:
-
-1. Getting the Principal components
-2. Run regression analysis on principal components
-
-The most common features of PCR are:
-
-1. Dimensionality Reduction
-2. Removal of multicollinearity
+  - This is answered just above.
 
 # Instructions to run project
 
