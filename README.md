@@ -89,7 +89,7 @@ The overall idea of regression is to examine two things:
 
 Run the following commands (all the required packages are in the different folder)
 
-1.  cd <<folder-name>>
+1.  cd SimpleDockerWorking
 2.  docker-compose build
 3.  docker-compose up
 
@@ -100,8 +100,8 @@ Run the following commands (all the required packages are in the different folde
 1.  cd SparkDocker
 2.  docker-compose build
 3.  docker-compose up
-4.  Terminal 1
+4.  Terminal 1: 
     python3 pyspark_consumer_api.py
 
-5.  Terminal 2
+5.  Terminal 2: 
     python3 kafka_producer_client.py
