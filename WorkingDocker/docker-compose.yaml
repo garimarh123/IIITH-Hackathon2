@@ -1,12 +1,12 @@
 version: "1"
 
 services:
-  hackathon2:
+  hackathon:
     deploy:
       replicas: 1
-    build: hackathon2
+    build: hackathon
     environment:
-      - HACKATHON_ENDPOINT=http://hackathon2:7777
+      - HACKATHON_ENDPOINT=http://hackathon:7777
     ports:
       - "7777:7777"
     volumes:
