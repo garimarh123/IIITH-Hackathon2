@@ -153,8 +153,8 @@ def load_model():
 # function to predict the selling price using the model
 def predict_with_test_set():
     global cat_ix
-    testData = read_csv("data/train.csv", sep=",", na_values=missing_values)
-    testData = substitute(copy.deepcopy(trainData))
+    testData = read_csv("data/test.csv", sep=",", na_values=missing_values)
+    testData = substitute(copy.deepcopy(testData))
 
     X_test, y_test = prepare_data(testData)
 
