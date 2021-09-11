@@ -1,0 +1,13 @@
+pyspark==2.3.2
+pandas
+findspark
+py4j
+nltk
+kafka-python
+kafka
+confluent-kafka
+numpy
+sklearn
+pandas
+copy
+json
