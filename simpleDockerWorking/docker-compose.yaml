@@ -10,6 +10,4 @@ services:
     ports:
       - "7777:7777"
     volumes:
-      - ./models:/app/models
       - ./data:/app/data
-      - ./html:/app/html

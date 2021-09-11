@@ -96,3 +96,11 @@ The most common features of PCR are:
 
 1. Dimensionality Reduction
 2. Removal of multicollinearity
+
+# Instructions to run project
+
+Run the following commands (all the required packages are in the different folder)
+
+1.  cd <<folder-name>>
+2.  docker-compose build
+3.  docker-compose up
